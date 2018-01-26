@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="my.ky.test.dal.mapper.ChkCfgMapper">
+
+    <resultMap id="BaseResultMap" type="my.ky.test.dal.model.ChkCfg">
+        <id column="ID" property="id" jdbcType="DECIMAL"/>
+        <result column="COMPANY_CODE" property="companyCode" jdbcType="VARCHAR"/>
+        <result column="COMPANY_TYPE" property="companyType" jdbcType="VARCHAR"/>
+        <result column="CHK_TYPE" property="chkType" jdbcType="VARCHAR"/>
+        <result column="FILE_METHOD" property="fileMethod" jdbcType="VARCHAR"/>
+        <result column="FILE_TIME" property="fileTime" jdbcType="VARCHAR"/>
+        <result column="FILE_TEMPLATE_NO" property="fileTemplateNo" jdbcType="VARCHAR"/>
+        <result column="CHK_CYCLE" property="chkCycle" jdbcType="VARCHAR"/>
+        <result column="FTP_HOST" property="ftpHost" jdbcType="VARCHAR"/>
+        <result column="FTP_PORT" property="ftpPort" jdbcType="INTEGER"/>
+        <result column="FTP_USER" property="ftpUser" jdbcType="VARCHAR"/>
+        <result column="FTP_PWD" property="ftpPwd" jdbcType="VARCHAR"/>
+        <result column="FTP_REMOTE_DIR" property="ftpRemoteDir" jdbcType="VARCHAR"/>
+        <result column="OPERATE_IMPL_CLASS" property="operateImplClass" jdbcType="VARCHAR"/>
+        <result column="REFUND_CHECK_FLAG" property="refundCheckFlag" jdbcType="VARCHAR"/>
+        <result column="DEPEND_ON_BANK_CHK_FLAG" property="dependOnBankChkFlag" jdbcType="VARCHAR"/>
+        <result column="STATUS" property="status" jdbcType="VARCHAR"/>
+        <result column="OPEN_TIME" property="openTime" jdbcType="TIMESTAMP"/>
+        <result column="OPEN_BY" property="openBy" jdbcType="VARCHAR"/>
+        <result column="CLOSE_TIME" property="closeTime" jdbcType="TIMESTAMP"/>
+        <result column="CLOSE_BY" property="closeBy" jdbcType="VARCHAR"/>
+        <result column="REMARK" property="remark" jdbcType="VARCHAR"/>
+        <result column="CREATED_TIME" property="createdTime" jdbcType="TIMESTAMP"/>
+        <result column="CREATED_BY" property="createdBy" jdbcType="VARCHAR"/>
+        <result column="UPDATED_TIME" property="updatedTime" jdbcType="TIMESTAMP"/>
+        <result column="UPDATED_BY" property="updatedBy" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="BaseColumnList">
+        T.ID,
+        T.COMPANY_CODE,
+        T.COMPANY_TYPE,
+        T.CHK_TYPE,
+        T.FILE_METHOD,
+        T.FILE_TIME,
+        T.FILE_TEMPLATE_NO,
+        T.CHK_CYCLE,
+        T.FTP_HOST,
+        T.FTP_PORT,
+        T.FTP_USER,
+        T.FTP_PWD,
+        T.FTP_REMOTE_DIR,
+        T.OPERATE_IMPL_CLASS,
+        T.REFUND_CHECK_FLAG,
+        T.DEPEND_ON_BANK_CHK_FLAG,
+        T.STATUS,
+        T.OPEN_TIME,
+        T.OPEN_BY,
+        T.CLOSE_TIME,
+        T.CLOSE_BY,
+        T.REMARK,
+        T.CREATED_TIME,
+        T.CREATED_BY,
+        T.UPDATED_TIME,
+        T.UPDATED_BY
+    </sql>
+
+    <insert id="insert">
+        /* insert */
+        INSERT INTO T_CHK_CFG (
+            COMPANY_CODE,
+            COMPANY_TYPE,
+            CHK_TYPE,
+            FILE_METHOD,
+            FILE_TIME,
+            FILE_TEMPLATE_NO,
+            CHK_CYCLE,
+            FTP_HOST,
+            FTP_PORT,
+            FTP_USER,
+            FTP_PWD,
+            FTP_REMOTE_DIR,
+            OPERATE_IMPL_CLASS,
+            REFUND_CHECK_FLAG,
+            DEPEND_ON_BANK_CHK_FLAG,
+            STATUS,
+            OPEN_TIME,
+            OPEN_BY,
+            REMARK,
+            CREATED_TIME,
+            CREATED_BY,
+            UPDATED_TIME,
+            UPDATED_BY
+        ) VALUES (
+            #{companyCode, jdbcType=VARCHAR},
+            #{companyType, jdbcType=VARCHAR},
+            #{chkType, jdbcType=VARCHAR},
+            #{fileMethod, jdbcType=VARCHAR},
+            #{fileTime, jdbcType=VARCHAR},
+            #{fileTemplateNo, jdbcType=VARCHAR},
+            #{chkCycle, jdbcType=VARCHAR},
+            #{ftpHost, jdbcType=VARCHAR},
+            #{ftpPort, jdbcType=INTEGER},
+            #{ftpUser, jdbcType=VARCHAR},
+            #{ftpPwd, jdbcType=VARCHAR},
+            #{ftpRemoteDir, jdbcType=VARCHAR},
+            #{operateImplClass, jdbcType=VARCHAR},
+            #{refundCheckFlag, jdbcType=VARCHAR},
+            #{dependOnBankChkFlag, jdbcType=VARCHAR},
+            #{status, jdbcType=VARCHAR},
+            NOW(),
+            #{openBy, jdbcType=VARCHAR},
+            #{remark, jdbcType=VARCHAR},
+            NOW(),
+            #{createdBy, jdbcType=VARCHAR},
+            NOW(),
+            #{updatedBy, jdbcType=VARCHAR})
+    </insert>
+
+    <update id="update">
+        /* update */
+        UPDATE
+            T_CHK_CFG T
+        SET
+            <if test="companyType != null">
+                T.COMPANY_TYPE = #{companyType, jdbcType=VARCHAR},
+            </if>
+            <if test="chkType != null">
+                T.CHK_TYPE = #{chkType, jdbcType=VARCHAR},
+            </if>
+            <if test="fileMethod != null">
+                T.FILE_METHOD = #{fileMethod, jdbcType=VARCHAR},
+            </if>
+            <if test="fileTime != null">
+                T.FILE_TIME = #{fileTime, jdbcType=VARCHAR},
+            </if>
+            <if test="fileTemplateNo != null">
+                T.FILE_TEMPLATE_NO = #{fileTemplateNo, jdbcType=VARCHAR},
+            </if>
+            <if test="chkCycle != null">
+                T.CHK_CYCLE = #{chkCycle, jdbcType=VARCHAR},
+            </if>
+            <if test="ftpHost != null">
+                T.FTP_HOST = #{ftpHost, jdbcType=VARCHAR},
+            </if>
+            <if test="ftpPort != null">
+                T.FTP_PORT = #{ftpPort, jdbcType=INTEGER},
+            </if>
+            <if test="ftpUser != null">
+                T.FTP_USER = #{ftpUser, jdbcType=VARCHAR},
+            </if>
+            <if test="ftpUser != null">
+                T.FTP_USER = #{ftpUser, jdbcType=VARCHAR},
+            </if>
+            <if test="ftpPwd != null">
+                T.FTP_PWD = #{ftpPwd, jdbcType=VARCHAR},
+            </if>
+            <if test="ftpRemoteDir != null">
+                T.FTP_REMOTE_DIR = #{ftpRemoteDir, jdbcType=VARCHAR},
+            </if>
+            <if test="operateImplClass != null">
+                T.OPERATE_IMPL_CLASS = #{operateImplClass, jdbcType=VARCHAR},
+            </if>
+            <if test="refundCheckFlag != null">
+                T.REFUND_CHECK_FLAG = #{refundCheckFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="dependOnBankChkFlag != null">
+                T.DEPEND_ON_BANK_CHK_FLAG = #{dependOnBankChkFlag, jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                T.STATUS = #{status, jdbcType=VARCHAR},
+            </if>
+            <if test="openTime != null">
+                T.OPEN_TIME = #{openTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="openBy != null">
+                T.OPEN_BY = #{openBy, jdbcType=VARCHAR},
+            </if>
+            <if test="closeTime != null">
+                T.CLOSE_TIME = #{closeTime, jdbcType=TIMESTAMP},
+            </if>
+            <if test="closeBy != null">
+                T.CLOSE_BY = #{closeBy, jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                T.REMARK = #{remark, jdbcType=VARCHAR},
+            </if>
+            T.UPDATED_TIME = NOW(),
+            T.UPDATED_BY = #{updatedBy, jdbcType=VARCHAR}
+        WHERE
+            T.ID = #{id, jdbcType=DECIMAL}
+    </update>
+
+    <select id="selectOne" resultMap="BaseResultMap">
+        /* selectOne */
+        SELECT
+            <include refid="BaseColumnList"/>
+        FROM
+            T_CHK_CFG T
+        WHERE
+            1 = 1
+            <if test="id != null">
+                AND T.ID = #{id, jdbcType=DECIMAL}
+            </if>
+            <if test="companyCode != null">
+                AND T.COMPANY_CODE = #{companyCode, jdbcType=VARCHAR}
+            </if>
+    </select>
+
+    <select id="selectByParams" resultMap="BaseResultMap">
+        /* selectByParams */
+        SELECT
+            <include refid="BaseColumnList"/>
+        FROM
+            T_CHK_CFG T
+        WHERE
+            1 = 1
+            <if test="id != null">
+                AND T.ID = #{id, jdbcType=DECIMAL}
+            </if>
+            <if test="companyCode != null">
+                AND T.COMPANY_CODE = #{companyCode, jdbcType=VARCHAR}
+            </if>
+            <if test="chkType != null">
+                AND T.CHK_TYPE = #{chkType, jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                AND T.STATUS = #{status, jdbcType=VARCHAR}
+            </if>
+    </select>
+
+    <sql id="QueryCondition">
+        <if test="id != null">
+            AND T.ID = #{id, jdbcType=DECIMAL}
+        </if>
+        <if test="companyCode != null and companyCode != ''">
+            AND T.COMPANY_CODE = #{companyCode, jdbcType=VARCHAR}
+        </if>
+        <if test="companyType != null and companyType != ''">
+            AND T.COMPANY_TYPE = #{companyType, jdbcType=VARCHAR}
+        </if>
+        <if test="chkType != null and chkType != ''">
+            AND T.CHK_TYPE = #{chkType, jdbcType=VARCHAR}
+        </if>
+        <if test="status != null and status != ''">
+            AND T.STATUS = #{status, jdbcType=VARCHAR}
+        </if>
+    </sql>
+
+    <select id="selectTotalCount" resultType="int">
+        /* selectTotalCount */
+        SELECT
+            COUNT(*)
+        FROM
+            T_CHK_CFG T
+        WHERE
+            1 = 1 <include refid="QueryCondition"/>
+    </select>
+
+    <select id="selectPageList" resultMap="BaseResultMap">
+        /* selectPageList */
+        SELECT
+            <include refid="BaseColumnList"/>
+        FROM
+            T_CHK_CFG T
+        WHERE
+            1 = 1 <include refid="QueryCondition"/>
+        ORDER BY T.UPDATED_TIME DESC
+            LIMIT #{startRow}, #{pageSize}
+    </select>
+</mapper>

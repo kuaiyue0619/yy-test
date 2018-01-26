@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <!-- 引入spring默认配置 -->
+    <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!-- 管控台日志打印 使用spring默认 -->
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
+    <!-- 文件日志打印 自定义 -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 对应application.properties中logging.file配置 -->
+        <File>${LOG_FILE}</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}</fileNamePattern>
+        </rollingPolicy>
+        <encoder>
+            <!-- 在defaults.xml中配置 -->
+            <Pattern>${FILE_LOG_PATTERN}</Pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <root>
+        <springProfile name="dev">
+            <!-- 开发环境 -->
+            <appender-ref ref="CONSOLE"/>
+        </springProfile>
+        <springProfile name="!dev">
+            <!-- 非开发环境 -->
+            <appender-ref ref="FILE"/>
+        </springProfile>
+    </root>
+</configuration>
