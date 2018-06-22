@@ -57,7 +57,14 @@ public class ApplicationTest {
 
     @Test
     public void testAppConfig() {
+        System.out.println(appConfig.getEnv());
         System.out.println(appConfig.getName());
         System.out.println(appConfig.getTitle());
+        System.out.println(appConfig.getSecret());
+        System.out.println(appConfig.getNumber());
+        System.out.println(appConfig.getBignumber());
+        System.out.println(appConfig.getUuid());
+        System.out.println(appConfig.getNumberLessThanTen());
+        System.out.println(appConfig.getNumberInRange());
     }
 }

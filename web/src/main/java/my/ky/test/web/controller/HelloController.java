@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * <ul>
  * <li>测试控制器</li>
@@ -24,8 +27,14 @@ public class HelloController {
         log.debug("Logger Level ：DEBUG");
         log.info("Logger Level ：INFO");
         log.error("Logger Level ：ERROR");
+        Map<String, String> map = new HashMap<>();
+        map.put("a", "1");
+        map.put("b", "2");
+        map.put("c", "3");
         // 加入一个属性，用来在模板中读取
         modelMap.addAttribute("text", "启动成功！！");
+        modelMap.addAttribute("user", "杨大仙");
+        modelMap.addAttribute("data", map);
         // return模板文件的名称，对应src/main/resources/templates/index.ftl
         return "index";
     }

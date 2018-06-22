@@ -14,6 +14,13 @@ import lombok.Getter;
 public enum Status {
 
     /**
+     * 订单状态
+     */
+    UNPAID("UNPAID", "待支付"),
+    WAITING_FOR_RECEIVE("WAITING_FOR_RECEIVE", "待收货"),
+    DONE("DONE", "结束"),
+
+    /**
      * 对账配置状态
      */
     CHK_CFG_OPEN("1", "开通"),

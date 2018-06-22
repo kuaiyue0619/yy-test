@@ -14,9 +14,25 @@ import org.springframework.stereotype.Component;
 @Component
 public class AppConfig {
 
+    @Value("${spring.profiles.active}")
+    private String env;
+
     @Value("${my.ky.test.name}")
     private String name;
 
     @Value("${my.ky.test.title}")
     private String title;
+
+    @Value("${my.secret}")
+    private String secret;
+    @Value("${my.number}")
+    private String number;
+    @Value("${my.bignumber}")
+    private String bignumber;
+    @Value("${my.uuid}")
+    private String uuid;
+    @Value("${my.number.less.than.ten}")
+    private String numberLessThanTen;
+    @Value("${my.number.in.range}")
+    private String numberInRange;
 }
