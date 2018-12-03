@@ -38,6 +38,8 @@ public class MailTest extends BaseSpringTest {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("kriver@qq.com");
         message.setTo("kriver@qq.com");
+//        message.setFrom("Pay@oriental-finance.com");
+//        message.setTo("kuaiyue@oriental-finance.com");
         message.setSubject("主题：简单邮件");
         message.setText("测试邮件内容");
         mailSender.send(message);
@@ -89,6 +91,8 @@ public class MailTest extends BaseSpringTest {
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
         helper.setFrom("kriver@qq.com");
         helper.setTo("kriver@qq.com");
+//        helper.setFrom("Pay@oriental-finance.com");
+//        helper.setTo("kuaiyue@oriental-finance.com");
         helper.setSubject("主题：模板邮件");
         helper.setText(stringWriter.toString(), true);
         mailSender.send(mimeMessage);

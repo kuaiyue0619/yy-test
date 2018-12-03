@@ -48,7 +48,7 @@ public class ApplicationTest {
     }
 
     @Test
-    public void testRedis() throws Exception {
+    public void testRedis() {
         // 保存字符串
         stringRedisTemplate.opsForValue().set("aaa", "111");
         System.out.println(stringRedisTemplate.opsForValue().get("aaa"));
@@ -66,5 +66,18 @@ public class ApplicationTest {
         System.out.println(appConfig.getUuid());
         System.out.println(appConfig.getNumberLessThanTen());
         System.out.println(appConfig.getNumberInRange());
+    }
+
+    public static void main(String[] args) {
+        Boolean b;
+        b = Boolean.valueOf("true");
+        System.out.println(b);
+        System.out.println(b.hashCode());
+        b = Boolean.valueOf("false");
+        System.out.println(b);
+        System.out.println(b.hashCode());
+        b = Boolean.valueOf("123");
+        System.out.println(b);
+        System.out.println(b.hashCode());
     }
 }
