@@ -2,6 +2,8 @@
 <configuration>
     <!-- 引入spring默认配置 -->
     <include resource="org/springframework/boot/logging/logback/defaults.xml"/>
+    <!--<property name="CONSOLE_LOG_PATTERN" value="${CONSOLE_LOG_PATTERN:-%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr(${LOG_LEVEL_PATTERN:-%5p}) %clr(${PID:- }){magenta} %clr(-&#45;&#45;){faint} %clr([%15.15t]){faint} %clr(%-40.40logger{39}){cyan} %line %clr(:){faint} %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>-->
+    <!--<property name="FILE_LOG_PATTERN" value="${FILE_LOG_PATTERN:-%d{yyyy-MM-dd HH:mm:ss.SSS} ${LOG_LEVEL_PATTERN:-%5p} ${PID:- } -&#45;&#45; [%t] %-40.40logger{39} %line : %m%n${LOG_EXCEPTION_CONVERSION_WORD:-%wEx}}"/>-->
     <!-- 管控台日志打印 使用spring默认 -->
     <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>
     <!-- 文件日志打印 自定义 -->

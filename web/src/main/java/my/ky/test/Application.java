@@ -5,6 +5,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.context.ApplicationContext;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -23,7 +24,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        ApplicationContext ctx = SpringApplication.run(Application.class, args);
+        log.info("ctx:{},", ctx);
         log.info("应用启动成功！！！！~~~~~~~");
     }
 }
