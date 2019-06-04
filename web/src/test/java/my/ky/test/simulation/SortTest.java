@@ -185,4 +185,44 @@ public class SortTest {
         // 复制临时数组至原数组
         System.arraycopy(temp, 0, data, startIndex, endIndex - startIndex + 1);
     }
+
+    @Test
+    public void testQuickSort() {
+        this.quickSort(this.data);
+        System.out.println(Arrays.toString(this.data));
+    }
+
+    private void quickSort(int[] data) {
+        this.quickSortR(data, 0, data.length - 1);
+    }
+
+    private void quickSortR(int[] data, int startIndex, int endIndex) {
+        if (startIndex >= endIndex) {
+            // 递归退出条件
+            return;
+        }
+        // 计算分区点
+        int pivotIndex = this.partition(data, startIndex, endIndex);
+        this.quickSortR(data, startIndex, pivotIndex - 1);
+        this.quickSortR(data, pivotIndex + 1, endIndex);
+    }
+
+    private int partition(int[] data, int startIndex, int endIndex) {
+        int pivotValue = data[endIndex];
+        int i = startIndex;
+        // 神奇的代码 ---- start ----
+        for (int j = startIndex; j <= endIndex - 1; j++) {
+            if (data[j] < pivotValue) {
+                int temp = data[i];
+                data[i] = data[j];
+                data[j] = temp;
+                i++;
+            }
+        }
+        int temp = data[i];
+        data[i] = data[endIndex];
+        data[endIndex] = temp;
+        // 神奇的代码 ---- end ----
+        return i;
+    }
 }

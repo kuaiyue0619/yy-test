@@ -2,12 +2,7 @@ package my.ky.test.simulation;
 
 import org.junit.Test;
 
-import java.util.concurrent.BrokenBarrierException;
-import java.util.concurrent.CyclicBarrier;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-import java.util.concurrent.Semaphore;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 /**
  * <ul>
@@ -54,20 +49,15 @@ public class ThreadTest {
 
     @Test
     public void testInterrupt() throws InterruptedException {
-        Thread t = new Thread() {
-            @Override
-            public void run() {
-                while (!isInterrupted()) {
-                    try {
-                        Thread.sleep(5 * 1000);
-                    } catch (InterruptedException e) {
-                        System.out.println("儿子线程被老爹中断");
-                        e.printStackTrace();
-                        break;
-                    }
+        Thread t = new Thread(() -> {
+            for (int i = 0; ; i++) {
+                if (Thread.currentThread().isInterrupted()) {
+                    System.out.println("儿子线程被老爹中断,跳出循环");
+                    break;
                 }
+                System.out.println("子线程计数:" + i);
             }
-        };
+        });
         t.start();
         int i = 1;
         while (true) {
@@ -75,6 +65,104 @@ public class ThreadTest {
             System.out.println(i++);
             t.interrupt();
         }
+    }
+
+    private ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(
+            3, 3, 1L, TimeUnit.SECONDS,
+            new LinkedBlockingQueue<>());
+
+    @Test
+    public void testCountDownLatch() throws InterruptedException {
+        threadPoolExecutor.execute(() -> {
+            try {
+                for (int i = 0; ; i++) {
+                    System.out.println(i);
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        // 假设调用2个接口
+        CountDownLatch latch = new CountDownLatch(2);
+        threadPoolExecutor.execute(() -> {
+            try {
+                Thread.sleep(2000L);
+                System.out.println("线程1,执行2秒,计数器-1");
+                latch.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        threadPoolExecutor.execute(() -> {
+            try {
+                Thread.sleep(5000L);
+                System.out.println("线程2,执行5秒,计数器-1");
+                latch.countDown();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        latch.await();
+        System.out.println("线程1与线程2,均执行完毕...");
+    }
+
+    @Test
+    public void testCountDownLatch2() throws InterruptedException {
+        threadPoolExecutor.execute(() -> {
+            try {
+                for (int i = 0; ; i++) {
+                    System.out.println(i);
+                    Thread.sleep(1000);
+                }
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        Future<Integer> future1 = threadPoolExecutor.submit(() -> {
+            try {
+                int s = 5;
+                Thread.sleep(s * 1000L);
+                System.out.println("线程1,执行" + s + "秒");
+                return 1;
+            } catch (InterruptedException e) {
+                System.out.println("线程1被中断...");
+                return null;
+            }
+        });
+        Future<Integer> future2 = threadPoolExecutor.submit(() -> {
+            try {
+                int s = 3;
+                Thread.sleep(s * 1000L);
+                System.out.println("线程2,执行" + s + "秒");
+                return 2;
+            } catch (InterruptedException e) {
+                System.out.println("线程2被中断...");
+                return null;
+            }
+        });
+        int result = 0;
+        for (; ; ) {
+            if (future1.isDone()) {
+                future2.cancel(true);
+                try {
+                    result = future1.get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+            if (future2.isDone()) {
+                future1.cancel(true);
+                try {
+                    result = future2.get();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                }
+                break;
+            }
+        }
+        System.out.println("某个线程先执行执行完毕...result:" + result);
     }
 
     @Test
