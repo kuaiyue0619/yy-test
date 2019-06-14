@@ -9,7 +9,7 @@ import org.junit.Test;
  * <li>User:ky Date:2019/6/4 Time:16:20</li>
  * </ul>
  */
-public class _02_AddTwoNumbersTest {
+public class _0002_AddTwoNumbersTest {
 
     @ToString
     class ListNode {

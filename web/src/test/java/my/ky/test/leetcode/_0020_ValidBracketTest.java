@@ -13,7 +13,7 @@ import java.util.Stack;
  * <li>User:ky Date:2019/4/17 Time:16:45</li>
  * </ul>
  */
-public class _20_ValidBracketTest {
+public class _0020_ValidBracketTest {
 
     @Test
     public void solution() {

@@ -12,7 +12,7 @@ import java.util.Map;
  * <li>User:ky Date:2019/6/4 Time:16:09</li>
  * </ul>
  */
-public class _01_TwoSumTest {
+public class _0001_TwoSumTest {
 
     @Test
     public void solution() {
